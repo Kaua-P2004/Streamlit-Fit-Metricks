@@ -3,13 +3,18 @@ import streamlit as st
 from utils.components import *
 from utils.functions import *
 
+st.set_page_config(
+    page_title="FitMetricks",
+    page_icon="./assets/imgs/Fit_icon.ico",
+    layout="wide",
+)
 def render():
     user = st.session_state['user_name']
     col1, col2, col3 = st.columns([0.2, 0.1, 1])
 
     col1.write(f"## Olá, {user}")
     col2.image("./assets/imgs/Fit_logo.png")
-    
+
     component_effect_underline()
     st.write('## Bem Vindo ao Fit Metricks!')
     st.markdown('<div class="full-width-line-white"></div>', unsafe_allow_html=True)
@@ -64,11 +69,10 @@ def render():
             tile4 = row1[1].container(border=True)
             tile5 = row1[2].container(border=True)
             
-            function_PFC_calc(sex, waist, hip, neck, height, IMC, tile4, row)
-            function_PMM_calc(IMC, tile5, row)
+            function_PFC_calc(sex, age, waist, hip, neck, height, IMC, tile4, row1)
+            function_PMM_calc(IMC, tile5, row1)
 
 if __name__ == "__main__":
-    # NÃO repita st.set_page_config()
     component_hide_sidebar()
     component_fix_tab_echarts()
 
