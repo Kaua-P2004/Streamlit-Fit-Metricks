@@ -34,7 +34,6 @@ def function_circumferences():
 
     return neck, chest, waist, hip, thigh, calf, biceps, forearm
 
-
 def function_measures():
     col = st.columns(3)
 
@@ -110,11 +109,71 @@ def function_water_calc(weight,tile,row):
     with cols[1]: st.write(f"{(watter_per_kg * 1000) / 1500:.2f} Garrafas Grandes (1,5L)")
     with cols[1]: st.write(f"{(watter_per_kg * 1000) / 2000:.2f} Garrafas Grandes (2L)")
 
+def function_PFC_calc(sex, age, waist, hip, neck, height, IMC, tile, row):
+    if sex == "Homem": 
+        try:
+            PFC = 495/(1.0324 - 0.19077 * math.log10(waist - neck) + 0.15456 * math.log10(height)) - 450
+            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>{PFC:.2f}%</p>", unsafe_allow_html=True)
+            row[1].write("##### Explicação:")
+            cols = row[1].columns([0.5, 10, 0.5])
+            with cols[1]: st.write("Calculo baseado na formula de Jackson & Pollock")
+            if 18 <= age < 25:
+                function_PFC_structure(PFC, row, 4, 4, 6, 8, 10, 12, 13, 14, 16, 17, 20, 20, 24, 26, 36)
+            if 26 <= age < 35:
+                function_PFC_structure(PFC, row, 8, 8, 11, 12, 15, 16, 18, 18, 20, 22, 24, 24, 27, 28, 36)
+            if 36 <= age < 45:
+                function_PFC_structure(PFC, row, 10, 10, 14, 16, 18, 19, 21, 21, 23, 24, 25, 27, 29, 30, 39)
+            if 45 <= age < 55:
+                function_PFC_structure(PFC, row, 12, 12, 16, 18, 20, 21, 23, 24, 25, 26, 27, 28, 30, 32, 38)
+            if 56 <= age < 65:
+                function_PFC_structure(PFC, row, 13, 13, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 32, 38)
 
-def function_PFC_calc(sex, waist, hip, neck, height, IMC, tile, row):
-    if sex == "Homem": pfc = 86.010 * math.log10(waist - neck) - 70.041 * math.log10(height) + 36.76
-    elif sex == "Mulher": pfc = 495 / (1.29579 - 0.35004 * math.log10(waist + hip - neck) + 0.22100 * math.log10(height)) - 450
-    tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>{pfc}</p>", unsafe_allow_html=True)
+        except: 
+            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>Dados Invalidos</p>", unsafe_allow_html=True)
+    
+    elif sex == "Mulher": 
+        try:
+            PFC = 495 / (1.29579 - 0.35004 * math.log10(waist + hip - neck) + 0.22100 * math.log10(height)) - 450
+            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>{PFC:.2f}%</p>", unsafe_allow_html=True)
+            row[1].write("##### Explicação:")
+            cols = row[1].columns([0.5, 10, 0.5])
+            with cols[1]: st.write("Calculo baseado na formula de Jackson & Pollock")
+            if 18 <= age < 25:
+                function_PFC_structure(PFC, row, 4, 4, 6, 8, 10, 12, 13, 14, 16, 17, 20, 20, 24, 26, 36)
+        except:
+            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>Dados Invalidos</p>", unsafe_allow_html=True)
 
 def function_PMM_calc(IMC, tile, row):
     tile.write(f"<p style='text-align: center;'>PMM (Percentual de Massa Magra)</br>{IMC:.2f}</p>", unsafe_allow_html=True)
+
+def function_if_structure(row, texto1, texto2):
+    col1, col2 = row[1].columns([1, 1])
+    with col1: 
+        st.write(f"{texto1}")
+    with col2: 
+        st.write(f"{texto2}")
+        
+
+def function_PFC_structure(PFC, row, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15):
+    if PFC < v1:
+        function_if_structure(row, "Muito Baixo", "...")
+    elif v2 <= PFC < v3:
+        function_if_structure(row, "Exelente:", "...")
+
+    elif v4 <= PFC < v5:
+        function_if_structure(row, "Bom:", "...")
+    
+    elif v6 <= PFC < v7:
+        function_if_structure(row, "Acima da Media", "...")
+    
+    elif v8 <= PFC < v9:
+        function_if_structure(row, "Média", "...")
+    
+    elif v10 <= PFC < v11:
+        function_if_structure(row, "Abaixo da Média", "...")
+    
+    elif v12 <= PFC < v13:
+        function_if_structure(row, "Ruim", "...")
+    
+    elif v14 <= PFC < v15:
+        function_if_structure(row, "Muito Ruim", "...")
