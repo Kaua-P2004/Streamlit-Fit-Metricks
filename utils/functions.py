@@ -118,27 +118,27 @@ def function_if_structure(row, texto1, texto2):
         
 def function_PFC_structure(PFC, row, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15):
     if PFC < v1:
-        function_if_structure(row, "Muito Baixo", "...")
+        function_if_structure(row, "Muito Baixo", "Este nivel de godura corporal pode ser um sinal de desnutrição ou de um nível de gordura essencial comprometido.É importante consultar um profissional de saúde para avaliar a condição e tomar medidas adequadas.")
     elif v2 <= PFC < v3:
-        function_if_structure(row, "Exelente:", "...")
+        function_if_structure(row, "Exelente:", "Este nível representa um percentual de gordura corporal ideal, associado a uma boa saúde e desempenho físico. Reflete um equilíbrio adequado entre massa muscular e gordura no corpo.")
 
     elif v4 <= PFC < v5:
-        function_if_structure(row, "Bom:", "...")
+        function_if_structure(row, "Bom:", "Um índice considerado bom. Indica que o nível de gordura corporal está saudável, com baixo risco de complicações associadas ao excesso ou à falta de gordura.")
     
     elif v6 <= PFC < v7:
-        function_if_structure(row, "Acima da Media", "...")
+        function_if_structure(row, "Acima da Media", "Um percentual levemente maior que o ideal, mas melhor do que a média geral da população. Pode ser considerado saudável, mas requer atenção para evitar um aumento maior.")
     
     elif v8 <= PFC < v9:
-        function_if_structure(row, "Média", "...")
+        function_if_structure(row, "Média", "Percentual de gordura dentro da média populacional. Não representa grandes riscos, mas é importante monitorar os hábitos de vida.")
     
     elif v10 <= PFC < v11:
-        function_if_structure(row, "Abaixo da Média", "...")
+        function_if_structure(row, "Abaixo da Média", "Percentual de gordura acima do considerado ideal, mas ainda dentro de limites aceitáveis. Pode ser um sinal de alerta para futuros ajustes no estilo de vida.")
     
     elif v12 <= PFC < v13:
-        function_if_structure(row, "Ruim", "...")
+        function_if_structure(row, "Ruim", "Um nível alto de gordura corporal, com maior risco de complicações de saúde, como problemas cardiovasculares e metabólicos. Requer atenção e mudanças no estilo de vida.")
     
     elif v14 <= PFC < v15:
-        function_if_structure(row, "Muito Ruim", "...")
+        function_if_structure(row, "Muito Ruim", "Percentual de gordura muito elevado, indicando risco significativo de doenças como obesidade, diabetes e problemas cardíacos. É essencial buscar acompanhamento médico e realizar ajustes no estilo de vida.")
 
 def function_PFC_calc(sex, age, waist, hip, neck, height, IMC, tile, row):
     if sex == "Homem": 
