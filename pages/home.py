@@ -69,7 +69,7 @@ def render():
             tile4 = row1[1].container(border=True)
             tile5 = row1[2].container(border=True)
             
-            function_PFC_calc(sex, age, waist, hip, neck, height, IMC, tile4, row1)
+            function_PFC_calc(sex, age, waist, hip, neck, height, IMC, weight, tile4, row1)
             function_PMM_calc(IMC, tile5, row1)
 
 if __name__ == "__main__":

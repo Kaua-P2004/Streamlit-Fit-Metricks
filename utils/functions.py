@@ -140,11 +140,12 @@ def function_PFC_structure(PFC, row, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v1
     elif v14 <= PFC < v15:
         function_if_structure(row, "Muito Ruim", "Percentual de gordura muito elevado, indicando risco significativo de doenças como obesidade, diabetes e problemas cardíacos. É essencial buscar acompanhamento médico e realizar ajustes no estilo de vida.")
 
-def function_PFC_calc(sex, age, waist, hip, neck, height, IMC, tile, row):
+def function_PFC_calc(sex, age, waist, hip, neck, height, IMC, weight, tile, row):
     if sex == "Homem": 
         try:
             PFC = 495/(1.0324 - 0.19077 * math.log10(waist - neck) + 0.15456 * math.log10(height)) - 450
-            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>{PFC:.2f}%</p>", unsafe_allow_html=True)
+            PFC_kg = weight * (PFC / 100)
+            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>{PFC:.2f}% ou {PFC_kg:.2f}Kg</p>", unsafe_allow_html=True)
             row[1].write("##### Explicação:")
             cols = row[1].columns([0.5, 10, 0.5])
             with cols[1]: st.write("Calculo baseado na formula de Jackson & Pollock")
@@ -165,7 +166,8 @@ def function_PFC_calc(sex, age, waist, hip, neck, height, IMC, tile, row):
     elif sex == "Mulher": 
         try:
             PFC = 495 / (1.29579 - 0.35004 * math.log10(waist + hip - neck) + 0.22100 * math.log10(height)) - 450
-            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>{PFC:.2f}%</p>", unsafe_allow_html=True)
+            PFC_kg = weight * (PFC / 100)
+            tile.write(f"<p style='text-align: center;'> PFC (Percentual de Gordura Corporal)</br>{PFC:.2f}% ou {PFC_kg:.2f}Kg</p>", unsafe_allow_html=True)
             row[1].write("##### Explicação:")
             cols = row[1].columns([0.5, 10, 0.5])
             with cols[1]: st.write("Calculo baseado na formula de Jackson & Pollock")
